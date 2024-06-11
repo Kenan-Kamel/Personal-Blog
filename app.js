@@ -3,11 +3,12 @@ require('dotenv').config();
 // creating an express app 
 const express = require('express');
 const expressLayout = require('express-ejs-layouts');
-
+const connectDB= require('./server/config/db');
 const app = express(); 
 const PORT = 5000 || process.env.port 
 
-
+// connect to the DB
+connectDB();
 app.use(express.static('public'))
 //view Engine 
 app.use(expressLayout); 
