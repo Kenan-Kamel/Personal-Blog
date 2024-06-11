@@ -4,18 +4,33 @@ const router = express.Router();
 //** This is the home -->GET */
 router.get('',async(req,res)=>{
 
-    const locals= {
-
-        title:"Kenan Alghythee Blog",
-        description:"Kenan Alghythee Personal/Professional "
-    }
     
 
 
     try{
+        const locals= {
 
-        const data = await Post.find();
-        res.render('index', {locals,data})
+        title:"Kenan Alghythee Blog",
+        description:"Kenan Alghythee Personal/Professional "
+    }
+     let perPage =10;
+     let page = req.query.page || 1; 
+     const data = await Post.aggregate([{$sort:{createdAt: -1}}])
+     .skip(perPage * page - perPage)
+     .limit(perPage)
+     .exec();
+
+     const Count = await Post.countDocuments();
+     console.log(Count)
+     const nextPage = parseInt(page) + 1 
+     const hasNextPage = nextPage <= Math.ceil(Count/perPage);
+    
+
+        //const data = await Post.find();
+        res.render('index', {locals
+            ,data
+            ,current: page,
+             nextPage:hasNextPage ?nextPage : null})
 
 
     }catch (error)
@@ -38,6 +53,7 @@ router.get('/about',(req,res)=>{
 
 
 // Testing the DataBase
+/** 
 function insertPostData(){
     Post.insertMany([
         {
@@ -47,6 +63,8 @@ function insertPostData(){
     ])
 }
 insertPostData()
+*/
+
 // the database has been tested and it works by adding data
 module.exports =router;
 
