@@ -21,6 +21,7 @@ app.set('view engine', 'ejs');
 
 // sending a request
 app.use('/', require('./server/routes/main'))
+app.use('/', require('./server/routes/admin'))
 
 //listening on a given port 
 app.listen(PORT, ()=>{
