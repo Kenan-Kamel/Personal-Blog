@@ -9,6 +9,9 @@ const PORT = 5000 || process.env.port
 
 // connect to the DB
 connectDB();
+app.use(express.urlencoded({extend: true}))
+app.use(express.json());
+
 app.use(express.static('public'))
 //view Engine 
 app.use(expressLayout); 

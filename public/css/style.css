@@ -323,6 +323,7 @@ img {
   top: 0;
   right: 0;
   color: var(--gray-light);
+  cursor: pointer;
   padding: 15px;
 }
 

@@ -48,22 +48,61 @@ router.get('/about',(req,res)=>{
     res.render('about')
 }); 
 
+router.get('/post/:id', async (req,res)=>{
+    
+    try{
+      
+    let slug = req.params.id; 
+
+        const data = await Post.findById({_id: slug});
+          const locals = {
+            title: data.title
+    };
+
+        res.render('post', {locals,data});
+
+        
+
+    } catch(error){
+        console.log(error)
+    }
+
+})
 
 
+// POST Req
+
+    router.post('/search',async(req,res)=>{
+        try{
+            const locals= {
+            title:'Search'
+        }
+           let SearchTerm = req.body.searchTerm; 
+           const searchNoSpecChar = SearchTerm.replace(/[^a-zA-Z0-9 ]/g,"")
+           const data = await Post.find({
+            $or: [
+                {title: {$regex: new RegExp(searchNoSpecChar, 'i')}},
+                {body: {$regex: new RegExp(searchNoSpecChar, 'i')}}
 
 
-// Testing the DataBase
-/** 
-function insertPostData(){
-    Post.insertMany([
-        {
-            title: "Building a Blog",
-            body: "Test again 2 "
-        },
-    ])
-}
-insertPostData()
-*/
+            ]
+           });
+
+    
+
+           
+            res.render("search", {
+                data,
+                locals
+            });
+
+        }catch(error){
+            console.log(error)
+        }
+
+    });
+
+
 
 // the database has been tested and it works by adding data
 module.exports =router;
