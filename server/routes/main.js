@@ -102,8 +102,6 @@ router.get('/post/:id', async (req,res)=>{
 
     });
 
-
-
 // the database has been tested and it works by adding data
 module.exports =router;
 

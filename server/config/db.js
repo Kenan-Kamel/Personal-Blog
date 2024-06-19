@@ -1,9 +1,5 @@
 const mongoose = require('mongoose');
-
-
 const connectDB = async() =>{
-
-
 
 try{
 
@@ -17,6 +13,6 @@ try{
     console.log(error)
 
 }
-} 
+}                 
 
-module.exports = connectDB
+module.exports = connectDB 
