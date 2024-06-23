@@ -26,11 +26,10 @@
   "[json]": {},
   "workbench.statusBar.visible": true,
   "editor.minimap.enabled": false,
-  "breadcrumbs.enabled": false,
-  "workbench.iconTheme": "material-icon-theme",
+  "breadcrumbs.enabled": true,
+  "workbench.iconTheme": "file-icons",
   "update.showReleaseNotes": false,
   "zenMode.hideLineNumbers": false,
-  "zenMode.hideTabs": false,
   "editor.lineNumbers": "relative",
 
   "vim.leader": "<Tab>",

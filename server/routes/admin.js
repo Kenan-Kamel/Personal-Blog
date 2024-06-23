@@ -18,7 +18,7 @@ const authMiddleware = (req,res,next) =>{
                 alert.notify ({ 
                  title: 'Blog notification ',
                  message: 'Please make sure to be logged in!' });
-                res.redirect('/admin')
+                 res.redirect('/admin')
                // return res.status(401).json({message: 'Unauthorized'})
                 
     }
@@ -108,14 +108,80 @@ router.post('/register', async (req,res) => {
 
 router.get('/dashboard',authMiddleware, async (req,res) =>{
 
-    res.render('admin/dashboard')
+try {
+
+    const locals = {
+        title:'Dashboard',
+        description: 'Kenan Alghythee Blog'
+    }
+
+    const data = await Post.find()
+    res.render('admin/dashboard', {
+        locals,
+        data, 
+        layout: adminLayout
+    })
+
+}catch (error){
+   console.log(error)
+}
+
+});
+
+// Create a new Post 
+
+router.get('/add-post',authMiddleware, async (req,res) =>{
+
+try {
+
+    const locals = {
+        title:'Add Post',
+        description: 'Kenan Alghythee Blog'
+    }
+
+    const data = await Post.find()
+    res.render('admin/add-post', {
+        locals,
+        layout:adminLayout
+    })
+
+}catch (error){
+    console.log(error)
+}
 
 });
 
 
+//create a new post , by pushing that into the database 
+
+router.post('/add-post',authMiddleware, async (req,res) =>{
+
+try {
+
+    console.log(req.body)
+
+    try{
+        const newPost = new Post({
+            title: req.body.title,
+            body: req.body.body
+        })
+
+        await Post.create(newPost)
+        res.redirect('/dashboard')
 
 
+    } catch(error){
 
+        console.log(error)
+
+    }
+
+
+}catch (error){
+    console.log(error)
+}
+
+});
 
 
 module.exports = router;
