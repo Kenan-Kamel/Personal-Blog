@@ -21,3 +21,15 @@ document.addEventListener('DOMContentLoaded', function(){
             })
         }
 });
+function uploadAttachment(attachment){
+    console.log('uploadAttachment has been called')
+}
+document.addEventListener('trix-attachment-add', function(event){
+
+    var attachment = event.attachment; 
+    console.log(attachment)
+    if(attachment.file){
+        uploadAttachment(attachment)
+    }
+
+});

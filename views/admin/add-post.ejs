@@ -1,3 +1,8 @@
+<head>
+  <link rel="stylesheet" type="text/css" href="https://unpkg.com/trix@2.0.8/dist/trix.css">
+  <script type="text/javascript" src="https://unpkg.com/trix@2.0.8/dist/trix.umd.min.js"></script>
+</head>
+
 <a href="/dashboard"> &larr; Back</a>
 
 <div class="admin-title">
@@ -9,6 +14,8 @@
     <input type="text" placeholder="Post Title" name="title">
 
     <label for="body"><b>Content</b></label>
-    <textarea name="body" cols="20" row="20"></textarea>
+    
+     <input id="x" type="hidden" name="body">
+    <trix-editor input="x" autofocus="false"></trix-editor>
     <input type="submit" value="Add" class="btn">
 </form>
