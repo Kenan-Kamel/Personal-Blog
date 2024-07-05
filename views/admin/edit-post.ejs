@@ -14,13 +14,15 @@
   
   
 
-  <form action="/add-post" method="POST">
+  <form action="/edit-post/<%= data._id %>?_method=PUT" method="POST" autofocus ='false'>
       <label for="title"><b>Title</b></label>
-      <input type="text" placeholder="Post Title" name="title">
+      <input autofocus="true" type="text" placeholder="Post Title" name="title" value="<%= data.title %>">
+
+
   
       <label for="body"><b>Content</b></label>
       
-       <input id="x" type="hidden" name="body">
-      <trix-editor input="x" autofocus="false"></trix-editor>
-      <input type="submit" value="Add" class="btn">
+       <input id="x" type="hidden" name="body"" autofocus="false">
+      <trix-editor input="x" autofocus="false"> <%= data.body %> </trix-editor>
+      <input type="submit" value="Update" class="btn">
   </form>

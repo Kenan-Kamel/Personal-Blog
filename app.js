@@ -11,12 +11,12 @@ const path = require('path')
 const app = express(); 
 const PORT = 5000 || process.env.port 
 const dbURL = process.env.MONGODB_URL ;
-
+const methodOverride =require('method-override')
 // connect to the DB
 connectDB();
 app.use(express.urlencoded({extended: true}))
 app.use(express.json());
-
+app.use(methodOverride('_method'))
 app.use(cookieParser())
 
 

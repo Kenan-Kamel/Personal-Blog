@@ -195,7 +195,9 @@ try {
     const data = await Post.findOne({_id: req.params.id});
     res.render('admin/edit-post.ejs',
         {
-        data, layout:adminLayout, locals
+        data, 
+        layout:adminLayout, 
+        locals
     })
     
 
@@ -214,11 +216,34 @@ try {
         body: req.body.body,
         updatedAt: Date.now()
     });
-    res.redirect(`/edit-post/${req.params.id}`)
+    res.redirect(`/edit-post/${req.params.id}`);
 
 }catch (error){
     console.log(error)
 }
 
 });
+
+
+/// delete a post 
+router.delete('/delete-post/:id',authMiddleware, async (req,res) =>{
+
+try {
+
+    await Post.deleteOne({_id:req.params.id});
+    res.redirect('/dashboard')
+
+}catch (error){
+    console.log(error)
+}
+
+});
+router.get('/logout', (req,res) =>{
+    res.clearCookie('token')
+    res.redirect('/admin')
+})
+
 module.exports = router;
+
+
+// delete a post 
