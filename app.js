@@ -12,6 +12,7 @@ const app = express();
 const PORT = 5000 || process.env.port 
 const dbURL = process.env.MONGODB_URL ;
 const methodOverride =require('method-override')
+const {isActiveRoute} = require('./server/helpers/routerHelpers')
 // connect to the DB
 connectDB();
 app.use(express.urlencoded({extended: true}))
@@ -40,6 +41,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.use('/', require('./server/routes/main'))
 app.use('/', require('./server/routes/admin'))
 
+app.locals.isActiveRoute = isActiveRoute;
 //listening on a given port 
 app.listen(PORT, ()=>{
     console.log(`App is listening on port number ${PORT}`)

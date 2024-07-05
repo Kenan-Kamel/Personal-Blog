@@ -28,9 +28,9 @@ router.get('',async(req,res)=>{
 
         //const data = await Post.find();
         res.render('index', {locals
-            ,data
-            ,current: page,
-             nextPage:hasNextPage ?nextPage : null})
+            ,data,
+            current: page,
+            nextPage:hasNextPage ?nextPage : null})
 
 
     }catch (error)
@@ -47,6 +47,11 @@ router.get('',async(req,res)=>{
 router.get('/about',(req,res)=>{
     res.render('about')
 }); 
+
+router.get('/contact',(req,res)=>{
+    res.render('contact')
+}); 
+
 
 router.get('/post/:id', async (req,res)=>{
     
